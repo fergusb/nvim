@@ -1,7 +1,7 @@
-"neo vim config file ~/.config/nvim/init.vim
+" neovim config file ~/.config/nvim/init.vim
 " Fergus Bremner <fergus.bremner@gmail.com>
 
-" Pathogen - make sure this comes first
+" Pathogen - must come first
 execute pathogen#infect()
 execute pathogen#helptags()
 
@@ -52,6 +52,11 @@ set undoreload=100  " maximum number lines to save for undo on a buffer reload
 set directory=$HOME/.config/nvim/tmp//,.,/tmp//  " swp files to /tmp if neccesary
 set undodir=$HOME/.config/nvim/undo//
 set viewdir=$HOME/.config/nvim/view//
+
+" Create directories if they don't exist
+silent execute '!mkdir -p $HOME/.config/nvim/tmp > /dev/null 2>&1'
+silent execute '!mkdir -p $HOME/.config/nvim/undo > /dev/null 2>&1'
+silent execute '!mkdir -p $HOME/.config/nvim/view > /dev/null 2>&1'
 
 " Section: Search {{{1
 "---------------------------------------------------------------------------"
@@ -215,7 +220,7 @@ if has("autocmd")
   autocmd FileType mail,human,mkd,txt,vo_base set spelllang=en_gb,de
 
   " dynamically set filetype-specific dictionary
-  " autocmd FileType * exec('setlocal dict+=~/.vim/dict/'.expand('<amatch>').'.dict')
+  " autocmd FileType * exec('setlocal dict+=~/.config/nvim/dict/'.expand('<amatch>').'.dict')
 
   augroup filetype
     autocmd BufRead,BufNewFile *.less set filetype=css
@@ -333,6 +338,9 @@ nnoremap Q <Nop>
 
 " new tab quick
 nnoremap <leader>t :tabnew<cr>
+
+" edit this file
+nnoremap <leader>ev :tabe $HOME/.config/nvimrc<cr>
 
 "-- F-keys --"
 " toogle paste mode
@@ -461,6 +469,106 @@ imap <C-Down> <C-o>:<C-u>move .+1<CR>
 vmap <C-Up> :move '<-2<CR>gv
 vmap <C-Down> :move '>+1<CR>gv
 
+" Section: Plugin-dependent settings {{{1
+"---------------------------------------------------------------------------"
+
+" ack
+map <leader>aa :Ack<space>
+
+" auto-pairs
+let g:AutoPairsShortcutToggle = '<leader>pt'
+let g:AutoPairsShortcutFastWrap = '<C-F>'
+let g:AutoPairsShortcutJump = '<C-N>'
+let g:AutoPairsShortcutBackInsert = '<C-B>'
+
+" BufExplorer
+" map <silent><leader>b :BufExplorer<CR>
+
+" gundo
+nnoremap <silent><leader>u :GundoToggle<CR>
+
+" Disable AutoComplPop at startup
+let g:acp_enableAtStartup = 0
+autocmd WinEnter css :AcpEnable
+autocmd WinLeave css :AcpDisable
+" autocmd FileType mail,txt set :AcpDisable
+
+" ShowMarks
+let g:showmarks_enable = 0
+let showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+" NERD commenter
+let g:NERDMenuMode = 3
+let g:NERDSpaceDelims = 1 " Adds space after comment 
+
+" SuperTab
+" let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
+" let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
+let g:SuperTabRetainCompletionType=2
+let g:SuperTabClosePreviewOnPopupClose = 1
+
+" python mode settings
+" Keys:
+" K             Show python docs
+" <Tab>         Rope autocomplete
+" <Ctrl-c>g     Rope goto definition
+" <Ctrl-c>d     Rope show documentation
+" <Ctrl-c>f     Rope find occurrences
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+
+" Documentation
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+
+" Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8"
+" Auto check on save
+let g:pymode_lint_write = 0
+autocmd FileType python map <leader>l :PymodeLint<CR>
+
+" Support virtualenv
+let g:pymode_virtualenv = 1
+
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'"
+let g:pymode_lint_ignore="E501,W002" " ignore stuff
+
+" Syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Don't autofold code
+let g:pymode_folding = 0
+
+" Disable python-mode rope use Jedi (below) instead
+let g:pymode_rope = 0
+
+" Jedi goodness
+let g:jedi#completions_enabled = 1
+
+" tagbar
+nnoremap <silent><F9> :TagbarToggle<CR>
+
+" ToggleWord
+map <leader>tw :ToggleWord<CR>
+
+" ToggleWords/vars/vals
+let g:toggle_words_dict = {'python': [['if', 'elif', 'else']]}
+
+" Yankring
+nnoremap <silent><leader>y :YRShow<CR>
+let g:yankring_history_dir = '$HOME/.config/nvim'
+let g:yankring_replace_n_pkey = '<Nop>'
+let g:yankring_replace_n_nkey = '<Nop>'
+
 " Section: Experimental {{{1
 "---------------------------------------------------------------------------"
 "set grepprg to vimgrep function
@@ -489,4 +597,3 @@ noremap % v% " visual to brace match
 " }}}
 
 " vim:ft=vim:fdm=marker
-
