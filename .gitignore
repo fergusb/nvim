@@ -1,0 +1,11 @@
+*.bak
+.DS_Store
+.netrwhist
+bak/*
+spell/*.spl
+spell/*.sug
+tmp/*
+undo/*
+view/*
+yankring_hist*
+viminfo
