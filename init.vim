@@ -472,11 +472,8 @@ vmap <C-Down> :move '>+1<CR>gv
 " Section: Plugin-dependent settings {{{1
 "---------------------------------------------------------------------------"
 
-let g:python_host_prog = '/usr/bin/python'
-let g:deoplete#enable_at_startup=1
-
 " ack
-map <leader>aa :Ack<space>
+" map <leader>aa :Ack<space>
 
 " auto-pairs
 let g:AutoPairsShortcutToggle = '<leader>pt'
@@ -513,6 +510,10 @@ let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 " let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+let g:python_host_prog = '/usr/bin/python2'
+" let g:python3_host_prog = '/usr/bin/python3'
+let g:deoplete#enable_at_startup=1
 
 " python mode settings
 " Keys:
