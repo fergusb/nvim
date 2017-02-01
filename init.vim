@@ -472,6 +472,9 @@ vmap <C-Down> :move '>+1<CR>gv
 " Section: Plugin-dependent settings {{{1
 "---------------------------------------------------------------------------"
 
+let g:python_host_prog = '/usr/bin/python'
+let g:deoplete#enable_at_startup=1
+
 " ack
 map <leader>aa :Ack<space>
 
@@ -483,6 +486,9 @@ let g:AutoPairsShortcutBackInsert = '<C-B>'
 
 " BufExplorer
 " map <silent><leader>b :BufExplorer<CR>
+
+" gitgutter
+set updatetime=250
 
 " gundo
 nnoremap <silent><leader>u :GundoToggle<CR>
