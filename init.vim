@@ -156,7 +156,7 @@ if has("autocmd")
 
   augroup filetype
     autocmd BufRead,BufNewFile *.less set filetype=css
-    autocmd BufRead,BufNewFile *.scss set filetype=scss.css
+    autocmd BufRead,BufNewFile *.scss,*.less set fen foldmethod=indent
     autocmd BufRead,BufNewFile *.markdown,*.mdown,*.mkdn,*.md set filetype=mkd
   augroup END
 
