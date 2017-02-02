@@ -4,6 +4,7 @@
 bak/*
 spell/*.spl
 spell/*.sug
+shada/*
 tmp/*
 undo/*
 view/*

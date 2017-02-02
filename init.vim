@@ -9,14 +9,12 @@ execute pathogen#helptags()
 "---------------------------------------------------------------------------"
 
 set autochdir               " Auto-change cwd to current file
-set autoread                " Auto read a file when it's changed from without
 set autowrite               " Auto write file when switching to another file or window
 set cursorline
 set enc=utf-8               " Default encoding to UTF-8
 set fenc=utf-8              " ditto
 set fileformat=unix         " Set fileformat to UNIX
 set fileformats=unix,mac    " Fave filetypes
-set history=1000            " VIM history
 set lazyredraw              " Do not redraw, when running macros
 set linebreak               " Don't break words on wrap
 set matchpairs+=<:>         " Bounce between matches
@@ -37,15 +35,15 @@ set splitbelow              " New pane put below the current one
 set splitright              " New pane put to the right of the current one
 set switchbuf=usetab
 set t_vb=                   " Disable error beeps
-set viminfo=%,'20,<50,h     " Restore cursor position between sessions
-set viminfo+=n~/.config/nvim/tmp/viminfo " Change location of viminfo
-set whichwrap=b,s,h,l,<,>,[,] " keys wrap to previous/next line
+set shada=%,'20,<50,h       " Restore cursor position between sessions
+" set shada+=n~/.config/nvim/shada/main.shada " Change location of shada file
+" set whichwrap=b,s,h,l,<,>,[,] " keys wrap to previous/next line
 
 " Section: Swap and backup {{{1
 "---------------------------------------------------------------------------"
 
-set nobackup                  " No backups
-set nowritebackup             " No atomic saves
+" set nobackup                  " No backups
+" set nowritebackup             " No atomic saves
 set undofile
 set undolevels=100  " maximum number of changes that can be undone
 set undoreload=100  " maximum number lines to save for undo on a buffer reload
@@ -54,16 +52,15 @@ set undodir=$HOME/.config/nvim/undo//
 set viewdir=$HOME/.config/nvim/view//
 
 " Create directories if they don't exist
-silent execute '!mkdir -p $HOME/.config/nvim/tmp > /dev/null 2>&1'
-silent execute '!mkdir -p $HOME/.config/nvim/undo > /dev/null 2>&1'
-silent execute '!mkdir -p $HOME/.config/nvim/view > /dev/null 2>&1'
+" silent execute '!mkdir -p $HOME/.config/nvim/tmp > /dev/null 2>&1'
+" silent execute '!mkdir -p $HOME/.config/nvim/undo > /dev/null 2>&1'
+" silent execute '!mkdir -p $HOME/.config/nvim/view > /dev/null 2>&1'
 
 " Section: Search {{{1
 "---------------------------------------------------------------------------"
 
-set incsearch               " Show the `best match so far' as search strings are typed
 set magic                   " Magic on
-set mat=2
+" set mat=2
 set nohls                   " Don't highlight search
 set showmatch
 set smartcase
@@ -79,77 +76,14 @@ set modeline
 set modelines=5
 colorscheme acedia
 if exists('$TMUX')
-  set term=screen-256color
-endif
-
-" Section: GUI {{{1
-"---------------------------------------------------------------------------"
-
-if has("gui_running")
-
-  " set guifont=Hack\ 8
-  set lines=55
-  set columns=90
-
-  if has("gui_gtk2") " GTK/Linux font
-    set guifont=Screen\ 9
-  elseif has('gui_macvim')
-    set guifont=Monaco:h10  " Mac font
-    set noantialias
-    set transp=0 " transparency
-    set fuopt+=maxhorz " full width full screen
-  else
-    set guifont=monospace:h9
-  endif
-
-  " set guicursor=a:blinkon0
-  set guicursor=n-v-c:blinkon0
-
-  " Hide menus and toolbar
-  set guioptions-=m
-  set guioptions-=T
-
-  " Hide scrollbars
-  set guioptions-=L
-  set guioptions-=l
-  set guioptions-=R
-  set guioptions-=r
-  set guioptions-=b
-
-  set guioptions+=a " copy selection to register
-
-  if has("mouse")
-    set mousehide   " Hide mouse when typing
-    " set mousemodel=extend
-    set mousemodel=popup_setpos
-  endif
-else
-  set nuw=3
-  set ttimeoutlen=10
-  if has("autocmd")
-" escape insert mode immediately
-    augroup FastEscape
-      autocmd!
-      autocmd InsertEnter * set timeoutlen=0
-      autocmd InsertLeave * set timeoutlen=1000
-    augroup END
-  endif
-endif
-
-" Nice window title
-if has('title') && (has('gui_running') || &title)
-  set titlestring=
-  set titlestring+=%{v:progname} " program name
-  set titlestring+=\ \|\ %f\ " file name
-  set titlestring+=%h%m%r%w " flags
-  " set titlestring+=\ -\ %{substitute(getcwd(),\ $HOME,\ '~',\ '')} " cwd
+  " set term=screen-256color
 endif
 
 " Section: Status-line {{{1
 "---------------------------------------------------------------------------"
 
 " Format statusline
-set laststatus=2
+" set laststatus=2
 set statusline=
 set statusline+=%<[%n]\           " buffer number
 set statusline+=%Y\ 
@@ -179,19 +113,17 @@ set su=.h,~,.o,.info,.swp,.obj,.pyc      " low priority filetypes
 "---------------------------------------------------------------------------"
 
 filetype off
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
-" set autoindent
 " set smartindent
 set expandtab
-set smarttab
+" set smarttab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set nowrap
 set textwidth=79
-set formatoptions=qrn1
+" set formatoptions=qrn1
 " set formatoptions=tcrqn2
 " set wrapmargin=4
 " set lbr
@@ -276,11 +208,6 @@ if has("autocmd")
 
   augroup Python
     au!
-    " Python PEP8 compliant indentation - (not needed with python-mode plugin)
-    " autocmd FileType python,python.django set ai et ts=4 sts=4 sw=4
-    " autocmd FileType python,python.django set ai sr et ts=8 sts=4 sw=4
-    " autocmd FileType python,python.django set si cinwords=if,elif,else,for,while,try,except,finally,def,class
-    " autocmd FileType python,python.django set indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except
     autocmd FileType python setlocal nowrap
     autocmd FileType python,python.django setlocal foldlevel=99
   augroup END
@@ -308,10 +235,10 @@ endif " end has("autocmd")
 " initialize omnicompletion
 
 " completion style
-set wildmenu
+" set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz,*.bak,.DS_Store,*.pyc
-set complete=.,w,b,u,t
+" set complete=.,w,b,u,t
 set completeopt=longest,menuone
 " set complete=.,k,w,b,u,t,]
 " set complete=.,k,w,b,u,t,i,]
@@ -409,38 +336,6 @@ nnoremap <C-H> <C-W><C-H>
 
 let g:loaded_matchparen = 1   " Turn off bracket matching grey
 
-" Visual mode auto pairs
-vnoremap ' <ESC>`>a'<ESC>`<i'<ESC>
-vnoremap " <ESC>`>a"<ESC>`<i"<ESC>
-vnoremap ( <ESC>`>a)<ESC>`<i(<ESC>
-vnoremap < <ESC>`>a><ESC>`<i<<ESC>
-vnoremap { <ESC>`>a}<ESC>`<i{<ESC>
-vnoremap [ <ESC>`>a]<ESC>`<i[<ESC>
-" Insert mode auto pairs
-" inoremap [ []<ESC>:let leavechar="]"<CR>i
-" inoremap " ""<ESC>:let leavechar='"'<CR>i
-" inoremap ( ()<ESC>:let leavechar=")"<CR>i
-" complex curlies
-" inoremap {     {}<ESC>:let leavechar="}"<CR>i
-" inoremap {<CR> {<CR>}<ESC>O
-" inoremap {{    {
-" inoremap {}    {}
-
-" imap <C-j> <ESC>:exec "normal f" . leavechar<CR>a
-
-if has("autocmd")
-  " css
-  " autocmd FileType css inoremap :<space> : ;<left>
-  " autocmd FileType css inoremap (" ("")<ESC>:let leavechar=')'<CR>i<left>
-
-  " Markdown
-  " autocmd FileType mkd vnoremap i <ESC>`>a*<ESC>`<i*<ESC>
-  " autocmd FileType mkd vnoremap b <ESC>`>a**<ESC>`<i**<ESC>
-
-  " XML
-  " autocmd FileType html,xhtml,xml inoremap <buffer><silent> <C-S-B> <ESC>bdwi<<ESC>pa></<ESC>pa><ESC>bba
-endif
-
 " Section: Date & time {{{1
 "---------------------------------------------------------------------------"
 
@@ -451,23 +346,6 @@ let g:timestamp_regexp = '\v\C%(<Last %([cC]hanged?|[Mm]odified):\s+)@<=.*$'
 iab <silent> ddate <C-R>=strftime("%d %B %Y")<CR>
 iab <silent> ttime <C-R>=strftime("%I:%M:%S %p %Z")<CR>
 iab <silent> isoD <C-R>=strftime("%Y-%m-%d")<CR>
-
-" Section: Transpose {{{1
-"---------------------------------------------------------------------------"
-
-"nnoremap <silent> gb xph      " Transpose current character with next
-"nnoremap <silent> gc xhPl     " Transpose current character with previous
-"nnoremap <silent> gy dawwPb   " Transpose current word with next
-"nnoremap <silent> gl dawbPb   " Transpose current word with previous
-"nnoremap <silent> g{ {dap}p{  " Transpose current paragraph with next
-
-" Transpose lines vertically
-nmap <C-Up> :<C-u>move .-2<CR>
-nmap <C-Down> :<C-u>move .+1<CR>
-imap <C-Up> <C-o>:<C-u>move .-2<CR>
-imap <C-Down> <C-o>:<C-u>move .+1<CR>
-vmap <C-Up> :move '<-2<CR>gv
-vmap <C-Down> :move '>+1<CR>gv
 
 " Section: Plugin-dependent settings {{{1
 "---------------------------------------------------------------------------"
@@ -482,7 +360,7 @@ let g:AutoPairsShortcutJump = '<C-N>'
 let g:AutoPairsShortcutBackInsert = '<C-B>'
 
 " BufExplorer
-" map <silent><leader>b :BufExplorer<CR>
+map <silent><leader>b :BufExplorer<CR>
 
 " gitgutter
 set updatetime=250
@@ -512,7 +390,7 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabClosePreviewOnPopupClose = 1
 
 let g:python_host_prog = '/usr/bin/python2'
-" let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 let g:deoplete#enable_at_startup=1
 
 " python mode settings
@@ -556,19 +434,10 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 " Disable python-mode rope use Jedi (below) instead
-let g:pymode_rope = 0
+let g:pymode_rope = 1
 
 " Jedi goodness
-let g:jedi#completions_enabled = 1
-
-" tagbar
-nnoremap <silent><F9> :TagbarToggle<CR>
-
-" ToggleWord
-map <leader>tw :ToggleWord<CR>
-
-" ToggleWords/vars/vals
-let g:toggle_words_dict = {'python': [['if', 'elif', 'else']]}
+" let g:jedi#completions_enabled = 1
 
 " Yankring
 nnoremap <silent><leader>y :YRShow<CR>
