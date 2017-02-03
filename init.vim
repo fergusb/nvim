@@ -38,6 +38,7 @@ set t_vb=                   " Disable error beeps
 set shada=%,'20,<50,h       " Restore cursor position between sessions
 " set shada+=n~/.config/nvim/shada/main.shada " Change location of shada file
 " set whichwrap=b,s,h,l,<,>,[,] " keys wrap to previous/next line
+set clipboard+=unnamedplus  " Always copy to system clipboard
 
 " Section: Swap and backup {{{1
 "---------------------------------------------------------------------------"
