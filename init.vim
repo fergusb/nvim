@@ -438,7 +438,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
-" Disable python-mode rope use Jedi (below) instead
+" Enable python-mode rope or use Jedi (below) instead
 let g:pymode_rope = 1
 
 " Jedi goodness
@@ -446,7 +446,7 @@ let g:pymode_rope = 1
 
 " Yankring
 nnoremap <silent><leader>y :YRShow<CR>
-let g:yankring_history_dir = '$HOME/.config/nvim'
+let g:yankring_history_dir = '$HOME/.config/nvim/tmp'
 let g:yankring_replace_n_pkey = '<Nop>'
 let g:yankring_replace_n_nkey = '<Nop>'
 
