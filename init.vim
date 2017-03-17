@@ -17,7 +17,7 @@ set fileformat=unix         " Set fileformat to UNIX
 set fileformats=unix,mac    " Fave filetypes
 set lazyredraw              " Do not redraw, when running macros
 set linebreak               " Don't break words on wrap
-set matchpairs+=<:>         " Bounce between matches
+" set matchpairs+=<:>         " Bounce between matches
 set noerrorbells            " Turn off error warnings
 set nostartofline           " Keep the cursor in the current column with page commands
 set novisualbell
@@ -43,19 +43,12 @@ set clipboard+=unnamedplus  " Always copy to system clipboard
 " Section: Swap and backup {{{1
 "---------------------------------------------------------------------------"
 
-" set nobackup                  " No backups
-" set nowritebackup             " No atomic saves
 set undofile
 set undolevels=100  " maximum number of changes that can be undone
 set undoreload=100  " maximum number lines to save for undo on a buffer reload
 set directory=$HOME/.config/nvim/tmp//,.,/tmp//  " swp files to /tmp if neccesary
 set undodir=$HOME/.config/nvim/undo//
 set viewdir=$HOME/.config/nvim/view//
-
-" Create directories if they don't exist
-" silent execute '!mkdir -p $HOME/.config/nvim/tmp > /dev/null 2>&1'
-" silent execute '!mkdir -p $HOME/.config/nvim/undo > /dev/null 2>&1'
-" silent execute '!mkdir -p $HOME/.config/nvim/view > /dev/null 2>&1'
 
 " Section: Search {{{1
 "---------------------------------------------------------------------------"
@@ -118,7 +111,7 @@ filetype plugin indent on
 
 " set smartindent
 set expandtab
-" set smarttab
+set smarttab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -133,6 +126,7 @@ set equalprg=par\ -w79            " use par for =
 
 " Section: Abbreviations {{{1
 "---------------------------------------------------------------------------"
+
 iabbr teh the
 iabbr tehn then
 
@@ -271,40 +265,31 @@ nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>ev :tabe $HOME/.config/nvimrc<cr>
 
 "-- F-keys --"
-" toogle paste mode
+
+" F2 toggle paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-set showmode
 
 " F3 list buffers and enter number to switch
 nnoremap <F3> :buffers<CR>:buffer<Space>
+
+" F4 wrap / no wrap
+nnoremap <F4> :set invwrap wrap?<CR>
 
 " CTRL+F8 to reformat file as XML
 map <silent><C-F8> <Esc>:%!xmllint --format -<CR><CR>
 vmap <silent><C-F8> <Esc>:'<, '>!xmllint --format -<CR><CR>
 
-if has("gui_running")
-  " F12 toggle toolbar
-  map <silent><F12> :if &guioptions =~# 'T' \| set guioptions-=T \| else \| set guioptions+=T \| endif<CR>
-  " CTRL+F12 to toggle the right-hand scroll bar
-  nmap <silent><C-F12> :if &guioptions=~'r' \| set guioptions-=r \| else \| set guioptions+=r \| endif<CR>
-endif
-
-" Bash-like
-" cnoremap <C-a> <Home>
-" cnoremap <C-e> <End>
-" cnoremap <C-k> <C-U>
-
 " backspace in Visual mode deletes selection
 vnoremap <BS> d
 
-" Visual shifting (builtin-repeat)
-" Increase indent.
+" visual shifting (builtin-repeat)
+" increase indent.
 vnoremap <Tab> >gv
-" Decrease indent.
+" decrease indent.
 vnoremap <S-Tab> <gv
 
-" Standard control-backspace deletion
+" standard control-backspace deletion
 imap <C-BS> <C-W>
 
 " make CTRL+] behave like CTRL+[ while in insert mode
@@ -314,23 +299,9 @@ imap <silent><C-]> <C-[>
 nnoremap <leader>q gqap<CR>
 vnoremap <leader>q gq<CR>
 
-" Lazy moving
+" lazy moving up and down
 nnoremap j gj
 nnoremap k gk
-
-" remap omnicompletion to control-space
-" inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            " \ '\<lt>C-n>' :
-            " \ '\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?' .
-            " \ '\'\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\' :' .
-            " \ '\' \\<lt>bs>\\<lt>C-n>\'\<CR>'
-" imap <C-@> <C-Space>
-
-" easier split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Section: Brackets and auto-pairs {{{1
 "---------------------------------------------------------------------------"
@@ -427,7 +398,7 @@ let g:pymode_virtualenv = 1
 
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'"
+" let g:pymode_breakpoint_bind = '<leader>b'"
 let g:pymode_lint_ignore="E501,W002" " ignore stuff
 
 " Syntax highlighting
