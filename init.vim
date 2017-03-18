@@ -367,6 +367,9 @@ if has("macunix")
 else
   let g:python_host_prog = '/usr/bin/python2'
   let g:python3_host_prog = '/usr/bin/python3'
+  " disbale python interpreter checks
+  let g:python_host_skip_check=1
+  let g:python3_host_skip_check=1
 endif
 let g:deoplete#enable_at_startup=1
 
