@@ -337,8 +337,8 @@ map <silent><leader>b :BufExplorer<CR>
 " gitgutter
 set updatetime=250
 
-" gundo
-nnoremap <silent><leader>u :GundoToggle<CR>
+" mundo
+nnoremap <silent><leader>u :MundoToggle<CR>
 
 " Disable AutoComplPop at startup
 let g:acp_enableAtStartup = 0

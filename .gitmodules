@@ -57,3 +57,6 @@
 [submodule "bundle/deoplete-jedi"]
 	path = bundle/deoplete-jedi
 	url = https://github.com/zchee/deoplete-jedi.git
+[submodule "bundle/vim-mundo"]
+	path = bundle/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo.git
