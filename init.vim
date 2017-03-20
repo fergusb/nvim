@@ -2,6 +2,8 @@
 " Fergus Bremner <fergus.bremner@gmail.com>
 
 " Pathogen - must come first
+" call pathogen#infect()                      " use pathogen
+" call pathogen#runtime_append_all_bundles()  " use pathogen
 execute pathogen#infect()
 execute pathogen#helptags()
 
@@ -339,6 +341,12 @@ set updatetime=250
 
 " mundo
 nnoremap <silent><leader>u :MundoToggle<CR>
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Disable AutoComplPop at startup
 let g:acp_enableAtStartup = 0
