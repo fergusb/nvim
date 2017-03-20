@@ -56,3 +56,6 @@
 [submodule "bundle/vim-mundo"]
 	path = bundle/vim-mundo
 	url = https://github.com/simnalamburt/vim-mundo.git
+[submodule "bundle/nvim-miniyank"]
+	path = bundle/nvim-miniyank
+	url = https://github.com/bfredl/nvim-miniyank.git

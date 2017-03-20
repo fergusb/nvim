@@ -420,10 +420,23 @@ let g:pymode_rope = 1
 " let g:jedi#completions_enabled = 1
 
 " Yankring
-nnoremap <silent><leader>y :YRShow<CR>
-let g:yankring_history_dir = '$HOME/.config/nvim/tmp'
-let g:yankring_replace_n_pkey = '<Nop>'
-let g:yankring_replace_n_nkey = '<Nop>'
+" nnoremap <silent><leader>y :YRShow<CR>
+" let g:yankring_history_dir = '$HOME/.config/nvim/tmp'
+" let g:yankring_replace_n_pkey = '<Nop>'
+" let g:yankring_replace_n_nkey = '<Nop>'
+
+" nvim-miniyank
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
+
+map <leader>p <Plug>(miniyank-startput)
+map <leader>P <Plug>(miniyank-startPut)
+
+map <leader>c <Plug>(miniyank-tochar)
+map <leader>l <Plug>(miniyank-toline)
+map <leader>b <Plug>(miniyank-toblock)
+
+let g:miniyank_filename = $HOME."/.miniyank.mpack"
 
 " Section: Experimental {{{1
 "---------------------------------------------------------------------------"
