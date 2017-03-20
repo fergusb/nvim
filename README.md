@@ -5,12 +5,8 @@ Use the project install file.  The installer will backup the old nvim directory
 (if present) with a date stamp 
 
 ```
-cd nvim 
-./install
-```
-or
-```
-cd .config/nvim
+git clone https://github.com/fergusb/nvim.git ~/.config/
+cd ~/.comfig/nvim/
 ./install
 ```
 
