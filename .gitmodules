@@ -9,10 +9,6 @@
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
   ignore = dirty
-[submodule "bundle/YankRing"]
-	path = bundle/YankRing
-	url = https://github.com/vim-scripts/YankRing.vim.git
-  ignore = dirty
 [submodule "bundle/auto-pairs"]
 	path = bundle/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
