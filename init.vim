@@ -2,8 +2,6 @@
 " Fergus Bremner <fergus.bremner@gmail.com>
 
 " Pathogen - must come first
-" call pathogen#infect()                      " use pathogen
-" call pathogen#runtime_append_all_bundles()  " use pathogen
 execute pathogen#infect()
 execute pathogen#helptags()
 
@@ -40,7 +38,7 @@ set t_vb=                   " Disable error beeps
 set shada=%,'20,<50,h       " Restore cursor position between sessions
 " set shada+=n~/.config/nvim/shada/main.shada " Change location of shada file
 " set whichwrap=b,s,h,l,<,>,[,] " keys wrap to previous/next line
-set clipboard+=unnamedplus  " Always copy to system clipboard
+" set clipboard+=unnamedplus  " Always copy to system clipboard
 
 " Section: Swap and backup {{{1
 "---------------------------------------------------------------------------"
@@ -60,7 +58,6 @@ set magic                   " Magic on
 set nohls                   " Don't highlight search
 set showmatch
 set smartcase
-" set wrapscan                " begin search at top when EOF reached
 
 " Section: Syntax {{{1
 "---------------------------------------------------------------------------"
@@ -69,11 +66,8 @@ syntax enable                " syntax highlighting
 set synmaxcol=1024           " switch off for wide documents
 set t_Co=256                 " force 256color
 set modeline
-set modelines=5
+set modelines=1
 colorscheme acedia
-if exists('$TMUX')
-  " set term=screen-256color
-endif
 
 " Section: Status-line {{{1
 "---------------------------------------------------------------------------"
@@ -108,7 +102,6 @@ set su=.h,~,.o,.info,.swp,.obj,.pyc      " low priority filetypes
 " Section: Formatting {{{1
 "---------------------------------------------------------------------------"
 
-filetype off
 filetype plugin indent on
 
 " set smartindent
@@ -232,7 +225,7 @@ endif " end has("autocmd")
 " initialize omnicompletion
 
 " completion style
-" set wildmenu
+set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz,*.bak,.DS_Store,*.pyc
 " set complete=.,w,b,u,t
@@ -262,9 +255,6 @@ nnoremap Q <Nop>
 
 " new tab quick
 nnoremap <leader>t :tabnew<cr>
-
-" edit this file
-nnoremap <leader>ev :tabe $HOME/.config/nvimrc<cr>
 
 "-- F-keys --"
 
@@ -305,6 +295,9 @@ vnoremap <leader>q gq<CR>
 nnoremap j gj
 nnoremap k gk
 
+" save session
+nnoremap <leader>s :mksession<CR>
+
 " Section: Brackets and auto-pairs {{{1
 "---------------------------------------------------------------------------"
 
@@ -319,13 +312,13 @@ let g:timestamp_regexp = '\v\C%(<Last %([cC]hanged?|[Mm]odified):\s+)@<=.*$'
 
 iab <silent> ddate <C-R>=strftime("%d %B %Y")<CR>
 iab <silent> ttime <C-R>=strftime("%I:%M:%S %p %Z")<CR>
-iab <silent> isoD <C-R>=strftime("%Y-%m-%d")<CR>
+iab <silent> isod <C-R>=strftime("%Y-%m-%d")<CR>
 
 " Section: Plugin-dependent settings {{{1
 "---------------------------------------------------------------------------"
 
-" ack
-" map <leader>aa :Ack<space>
+" the silver searcher
+map <leader>aa :ag<space>
 
 " auto-pairs
 let g:AutoPairsShortcutToggle = '<leader>pt'
@@ -337,7 +330,11 @@ let g:AutoPairsShortcutBackInsert = '<C-B>'
 map <silent><leader>b :BufExplorer<CR>
 
 " gitgutter
-set updatetime=250
+" set updatetime=250
+nmap ]h <plug>GitGutterNextHunk
+nmap [h <plug>GitGutterPrevHunk
+nmap <leader>hs <plug>GitGutterStageHunk
+nmap <leader>hu <plug>GitGutterUndoHunk<Paste>
 
 " mundo
 nnoremap <silent><leader>u :MundoToggle<CR>
@@ -427,44 +424,11 @@ let g:pymode_rope = 1
 " Jedi goodness
 " let g:jedi#completions_enabled = 1
 
-" Yankring
-" nnoremap <silent><leader>y :YRShow<CR>
-" let g:yankring_history_dir = '$HOME/.config/nvim/tmp'
-" let g:yankring_replace_n_pkey = '<Nop>'
-" let g:yankring_replace_n_nkey = '<Nop>'
-
-" nvim-miniyank
-map p <Plug>(miniyank-autoput)
-map P <Plug>(miniyank-autoPut)
-
-map <leader>p <Plug>(miniyank-startput)
-map <leader>P <Plug>(miniyank-startPut)
-
-map <leader>c <Plug>(miniyank-tochar)
-map <leader>l <Plug>(miniyank-toline)
-map <leader>b <Plug>(miniyank-toblock)
-
-let g:miniyank_filename = $HOME."/.miniyank.mpack"
-
 " Section: Experimental {{{1
 "---------------------------------------------------------------------------"
-"set grepprg to vimgrep function
-set grepprg=vimgrep
 
 " Section: Unsorted {{{1
 "---------------------------------------------------------------------------"
-
-" Code folding options
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
 
 " Remove pesky DOS/Windows ^M
 noremap <leader>m0 mmHmt:%s/<C-V><CR>//ge<cr>'tzt'm
