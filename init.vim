@@ -1,5 +1,6 @@
 " neovim config file ~/.config/nvim/init.vim
 " Fergus Bremner <fergus.bremner@gmail.com>
+" Last Modified: 2017-03-21 09:49:29 CET
 
 " Pathogen - must come first
 execute pathogen#infect()
@@ -64,7 +65,6 @@ set smartcase
 
 syntax enable                " syntax highlighting
 set synmaxcol=1024           " switch off for wide documents
-set t_Co=256                 " force 256color
 set modeline
 set modelines=1
 colorscheme acedia
@@ -147,7 +147,7 @@ if has("autocmd")
   augroup filetype
     autocmd BufRead,BufNewFile *.less set filetype=css
     autocmd BufRead,BufNewFile *.scss,*.less set fen foldmethod=indent
-    autocmd BufRead,BufNewFile *.markdown,*.mdown,*.mkdn,*.md set filetype=mkd
+    autocmd BufRead,BufNewFile *.markdown,*.mdown,*.mkdn,*.md set filetype=markdown
   augroup END
 
   augroup css
@@ -173,16 +173,7 @@ if has("autocmd")
 
   augroup text
     au!
-    autocmd FileType txt set js
-    autocmd FileType txt set nosi
-    autocmd FileType txt set tw=80 fo+=aw2tq
-  augroup END
-
-  augroup markdown
-    au!
-    autocmd FileType mkd set nonu nosi nofen ts=4 sts=4 sw=4
-    autocmd FileType mkd set ai tw=80 fo+=wantq1 comments=n:>
-    " autocmd FileType mkd set ai tw=80 fo+=aw2tq comments=n:>
+    autocmd FileType txt set nosi js tw=80 fo+=aw2tq
   augroup END
 
   " in human-language files, automatically format everything at 80 chars:
@@ -306,7 +297,6 @@ let g:loaded_matchparen = 1   " Turn off bracket matching grey
 " Section: Date & time {{{1
 "---------------------------------------------------------------------------"
 
-" let g:timestamp_rep = '%Y-%m-%d'  " Format date thusly: YYYY-MM-DD
 let g:timestamp_rep = '%Y-%m-%d %I:%M:%S %Z'  " Format date thusly: YYYY-MM-DD h:m:s Z
 let g:timestamp_regexp = '\v\C%(<Last %([cC]hanged?|[Mm]odified):\s+)@<=.*$'
 
