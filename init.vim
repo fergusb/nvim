@@ -171,6 +171,11 @@ if has("autocmd")
     autocmd FileType mail set tw=80 fo=wantq1 smc=0
   augroup END
 
+  augroup markdown
+    au!
+    autocmd FileType txt set nosi js tw=80 fo+=aw2tq
+  augroup END
+
   augroup text
     au!
     autocmd FileType txt set nosi js tw=80 fo+=aw2tq
