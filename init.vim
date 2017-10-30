@@ -168,12 +168,12 @@ if has("autocmd")
     au!
     autocmd FileType mail set nonu noai nosi
     autocmd FileType mail set nobk noswapfile nowb
-    autocmd FileType mail set tw=80 fo=wantq1 smc=0
+    autocmd FileType mail set tw=80 fo+=wantq1 smc=0
   augroup END
 
-  augroup markdown
+  augroup mkd
     au!
-    autocmd FileType txt set nosi js tw=80 fo+=aw2tq
+    autocmd FileType markdown set nosi js tw=80 fo+=watq1
   augroup END
 
   augroup text
